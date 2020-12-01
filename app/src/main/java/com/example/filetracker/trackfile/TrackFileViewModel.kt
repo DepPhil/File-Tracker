@@ -13,8 +13,8 @@ class TrackFileViewModel(application: Application, private val fileId: Int): Vie
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     private val databaseDao: FileDatabaseDao = FileDatabase.getInstance(application).fileDatabaseDao
-    private var _fileName = MutableLiveData<String>()
-    val fileName: LiveData<String> get() = _fileName
+    private var _fileName = MutableLiveData<String?>()
+    val fileName: LiveData<String?> get() = _fileName
 
     override fun onCleared() {
         super.onCleared()

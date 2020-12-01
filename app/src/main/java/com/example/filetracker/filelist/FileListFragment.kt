@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.get
 import com.example.filetracker.R
 import com.example.filetracker.databinding.FragmentFileListBinding
 import timber.log.Timber
@@ -21,6 +24,25 @@ class FileListFragment: Fragment() {
     ): View? {
         Timber.i("Creating View")
         _binding = DataBindingUtil.inflate<FragmentFileListBinding>(inflater, R.layout.fragment_file_list, container, false)
+        val application = requireNotNull(this.activity).application
+        val showOutList = FileListFragmentArgs.fromBundle(requireArguments()).showOutList
+        val viewModelFactory = FileListViewModelFactory(application, showOutList)
+        val viewModel = ViewModelProvider(this, viewModelFactory).get(FileListViewModel::class.java)
+        binding.viewModel = viewModel
+
+        // Set up Adapter
+        val adopter = FileListAdopter(FileListClickListener {
+            fileId -> viewModel.onItemClick(fileId)
+        })
+        binding.fileListRecyclerView.adapter = adopter
+
+        // Observe the List
+        viewModel.filesWithLastMovement.observe(viewLifecycleOwner, Observer {
+            if(it != null){
+                adopter.submitList(it)
+
+            }
+        })
         return binding.root
     }
 

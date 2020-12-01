@@ -51,7 +51,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView3"
-            app:srcCompat="@drawable/ic_out_circle1"
+            app:srcCompat="@drawable/ic_out_circle"
             android:onClick="@{()-> viewModel.onFileMovingOut(true)}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

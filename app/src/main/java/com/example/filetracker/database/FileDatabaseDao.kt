@@ -6,14 +6,17 @@ import androidx.room.*
 
 @Dao
 interface FileDatabaseDao {
-    @Query("SELECT COUNT(file_id) FROM file_detail_table")
+    @Query("SELECT COUNT(file_id) FROM filedetailwithlastmovement WHERE moving_out = 0")
     fun getInFileNumber(): LiveData<Int?>
 
-    @Query("SELECT COUNT(file_id) FROM file_detail_table")
+    @Query("SELECT COUNT(file_id) FROM filedetailwithlastmovement WHERE moving_out = 1")
     fun getOutFileNumber(): LiveData<Int?>
 
-    @Query("SELECT * FROM max_movement_time")
-    fun getMaxMovementTime(): List<MaxMovementTime>
+    @Query("SELECT * FROM filedetailwithlastmovement WHERE moving_out = :showOutList")
+    fun getAllFilesWithLastMovement(showOutList: Boolean): LiveData<List<FileDetailWithLastMovement>>
+
+//    @Query("SELECT * FROM max_movement_time")
+//    fun getMaxMovementTime(): List<MaxMovementTime>
 
     @Insert
     fun insertFile(file: FileDetail)

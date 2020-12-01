@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/barcodeScannerFragment"
         android:name="com.example.filetracker.barcodescanner.BarcodeScannerFragment"
-        android:label="BarcodeScannerFragment"
+        android:label="Barcode Scanner"
         tools:layout="@layout/fragment_barcode_scanner">
 
         <action
@@ -27,7 +27,7 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.filetracker.mainFragment.MainFragment"
-        android:label="MainFragment"
+        android:label="File Tracker"
         tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_barcodeScannerFragment"
@@ -39,7 +39,7 @@
     <fragment
         android:id="@+id/fileListFragment"
         android:name="com.example.filetracker.filelist.FileListFragment"
-        android:label="FileListFragment">
+        android:label="IN/OUT File List">
     <argument
         android:name="showOutList"
         app:argType="boolean">
@@ -52,7 +52,7 @@
     <fragment
         android:id="@+id/addFileFragment"
         android:name="com.example.filetracker.addFile.AddFileFragment"
-        android:label="AddFileFragment" >
+        android:label="Add A File" >
         <argument
             android:name="fileId"
             app:argType="integer" />
@@ -64,7 +64,7 @@
     <fragment
         android:id="@+id/trackFileFragment"
         android:name="com.example.filetracker.trackfile.TrackFileFragment"
-        android:label="TrackFileFragment" >
+        android:label="Update File" >
         <argument
             android:name="fileId"
             app:argType="integer" />
@@ -78,8 +78,8 @@
         android:name="com.example.filetracker.filedetail.FileDetailFragment"
         android:label="fragment_file_details"
         tools:layout="@layout/fragment_file_details" >
-        <action
-            android:id="@+id/action_fileDetailFragment_to_fileListFragment"
-            app:destination="@id/fileListFragment" />
+        <argument
+            android:name="fileId"
+            app:argType="integer" />
     </fragment>
 </navigation>

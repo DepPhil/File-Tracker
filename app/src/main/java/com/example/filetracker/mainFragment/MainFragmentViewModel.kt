@@ -66,6 +66,7 @@ class MainFragmentViewModel(application: Application): AndroidViewModel(applicat
     fun addData(){
         uiScope.launch {
             withContext(Dispatchers.IO){
+
                 val file1 = FileDetail(1, "II(3)1/Estt/Testing/2020", "A file to keep test something")
                 val file2 = FileDetail(2, "II(3)2/Estt/Main/2020", "The Main Fragment is starting point of our app")
                 val file3 = FileDetail(3, "II(3)3/Estt/Scanner/2020", "The Barcode Scanner uses MI kit of google")

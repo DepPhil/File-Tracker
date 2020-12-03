@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
+import androidx.navigation.fragment.findNavController
 import com.example.filetracker.R
 import com.example.filetracker.databinding.FragmentFileListBinding
 import timber.log.Timber
@@ -40,7 +41,16 @@ class FileListFragment: Fragment() {
         viewModel.filesWithLastMovement.observe(viewLifecycleOwner, Observer {
             if(it != null){
                 adopter.submitList(it)
+            }
+        })
 
+        // Observe the click on item
+        viewModel.navigateToNextFragment.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                this.findNavController().navigate(
+                        FileListFragmentDirections.actionFileListFragmentToFileDetailFragment(it)
+                )
+                viewModel.doneNavigatingToNextFragment()
             }
         })
         return binding.root

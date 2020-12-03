@@ -2,6 +2,7 @@ package com.example.filetracker.filelist
 
 import android.app.Application
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.filetracker.database.FileDatabase
 import com.example.filetracker.database.FileDatabaseDao
@@ -19,6 +20,9 @@ class FileListViewModel(application: Application, showOutList: Boolean): ViewMod
     private val _filesWithLastMovement: LiveData<List<FileDetailWithLastMovement>> = databaseDao.getAllFilesWithLastMovement(showOutList)
      val filesWithLastMovement: LiveData<List<FileDetailWithLastMovement>> get() = _filesWithLastMovement
 
+    private val _navigateToNextFragment = MutableLiveData<Int?>()
+    val navigateToNextFragment: LiveData<Int?> get() = _navigateToNextFragment
+
     init {
         Timber.i("Initialising ViewModel")
 
@@ -26,7 +30,10 @@ class FileListViewModel(application: Application, showOutList: Boolean): ViewMod
     }
 
     fun onItemClick(fileId: Int){
-        Timber.i("An item clicked with id: $fileId")
+        _navigateToNextFragment.value = fileId
+    }
+    fun doneNavigatingToNextFragment(){
+        _navigateToNextFragment.value = null
     }
 
 }

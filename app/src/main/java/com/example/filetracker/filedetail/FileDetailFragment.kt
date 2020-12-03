@@ -28,6 +28,7 @@ class FileDetailFragment: Fragment() {
 
         // Setup adapter
         val adapter = FileDetailAdapter()
+        binding.fileDetailRecyclerView.adapter = adapter
 
         // Observer for submitting list to the adapter
         viewModel.movementDetailList.observe(viewLifecycleOwner, Observer {
@@ -35,7 +36,7 @@ class FileDetailFragment: Fragment() {
                 adapter.submitList(it)
             }
         })
-
+        binding.lifecycleOwner = this
         return binding.root
     }
 

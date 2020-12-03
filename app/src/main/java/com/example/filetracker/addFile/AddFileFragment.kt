@@ -38,6 +38,7 @@ class AddFileFragment: Fragment() {
                 this.findNavController().navigate(
                         AddFileFragmentDirections.actionAddFileFragmentToFileListFragment(false)
                 )
+                viewModel.doneNavigatingToNextFragment()
             }
         })
         return binding.root

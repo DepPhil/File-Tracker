@@ -15,7 +15,7 @@ interface FileDatabaseDao {
     @Query("SELECT * FROM filedetailwithlastmovement WHERE moving_out = :showOutList")
     fun getAllFilesWithLastMovement(showOutList: Boolean): LiveData<List<FileDetailWithLastMovement>>
 
-    @Query("SELECT * FROM movement_detail_table WHERE moved_file_id = :fileId")
+    @Query("SELECT * FROM movement_detail_table WHERE moved_file_id = :fileId ORDER BY movement_time DESC")
     fun getListMovementDetails(fileId: Int): List<MovementDetail>
 
 
@@ -50,7 +50,7 @@ interface FileDatabaseDao {
 
     @Transaction
     @Query("SELECT * FROM file_detail_table WHERE file_id = :fileId")
-    fun getFileMovementWithID(fileId:Long): FileMovement
+    fun getFileMovementWithID(fileId:Int): FileMovement
 
     // Get the maximum id number in order to create a new id number of file
     @Query("SELECT MAX(file_id) FROM file_detail_table")

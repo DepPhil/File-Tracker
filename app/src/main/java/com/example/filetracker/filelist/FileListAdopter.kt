@@ -8,8 +8,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.filetracker.database.FileDetailWithLastMovement
 import com.example.filetracker.databinding.ListItemFileBinding
+import timber.log.Timber
 
-class FileListAdopter(val clickListener: FileListClickListener):
+class FileListAdopter(private val clickListener: FileListClickListener):
         ListAdapter<FileDetailWithLastMovement, ViewHolder>(FileDiffCallback()){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
@@ -30,6 +31,11 @@ class ViewHolder private constructor(val binding: ListItemFileBinding):
                 fun from(parent: ViewGroup): ViewHolder{
                     val layoutInflater = LayoutInflater.from(parent.context)
                     val binding = ListItemFileBinding.inflate(layoutInflater, parent, false)
+                    val view = binding.root
+                    view.setOnLongClickListener {view ->
+                        Timber.i("Double click!!!")
+                        true
+                    }
                     return ViewHolder(binding)
                 }
             }
@@ -37,9 +43,12 @@ class ViewHolder private constructor(val binding: ListItemFileBinding):
             fun bind(item: FileDetailWithLastMovement, clickListener: FileListClickListener){
                 binding.file = item
                 binding.clickListener = clickListener
+
                 binding.executePendingBindings()
             }
         }
+
+
 
 class FileDiffCallback: DiffUtil.ItemCallback<FileDetailWithLastMovement>(){
     override fun areItemsTheSame(oldItem: FileDetailWithLastMovement, newItem: FileDetailWithLastMovement): Boolean {

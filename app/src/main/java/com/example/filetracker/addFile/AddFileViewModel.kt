@@ -11,6 +11,7 @@ import com.example.filetracker.database.FileDetail
 import com.example.filetracker.database.MovementDetail
 import kotlinx.coroutines.*
 import timber.log.Timber
+import java.util.*
 
 class AddFileViewModel(application: Application, private val fileId: Int): ViewModel() {
     private var viewModelJob = Job()
@@ -32,7 +33,7 @@ class AddFileViewModel(application: Application, private val fileId: Int): ViewM
     fun onAddFileRequest(){
         Timber.i("Adding File %s F.No. %s, Description: %s", fileId,  fileNumber, fileDescription)
         if(fileNumber != null && fileDescription != null){
-            val file = FileDetail(fileId, fileNumber!!, fileDescription!!)
+            val file = FileDetail(fileId, fileNumber!!.toUpperCase(Locale.ROOT), fileDescription!!)
             uiScope.launch {
                 withContext(Dispatchers.IO){
                     databaseDao.insertFile(file)

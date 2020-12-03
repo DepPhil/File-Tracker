@@ -13,6 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -23,10 +24,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:layout_weight="0"
                 android:orientation="horizontal">
 
@@ -34,7 +35,9 @@
                     android:id="@+id/imageView5"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    app:movementImage="@{file}" />
+                    android:padding="2dp"
+                    app:movementImage="@{movement}"
+                    tools:srcCompat="@drawable/ic_out_circle" />
 
                 <TextView
                     android:id="@+id/fileMovementTime"
@@ -42,7 +45,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="16dp"
-                    app:fileMovementTime="@{file}"
+                    app:fileMovementTime="@{movement}"
                     tools:text="Show Time here" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>

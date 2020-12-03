@@ -16,12 +16,21 @@ class FileDetailViewModel(application: Application, fileId: Int): ViewModel() {
     private val _movementDetailList = MutableLiveData<List<MovementDetail?>>()
             val movementDetailList: LiveData<List<MovementDetail?>> get() = _movementDetailList
 
+    private val _fileName = MutableLiveData<String?>()
+    val fileName: LiveData<String?> get() = _fileName
+
+    private val _fileDescription = MutableLiveData<String?>()
+    val fileDescription: LiveData<String?> get() = _fileDescription
+
     init {
         uiScope.launch {
             withContext(Dispatchers.IO){
                 _movementDetailList.postValue(
                         databaseDao.getListMovementDetails(fileId)
                 )
+                val file = databaseDao.getFileDetailsWithId(fileId)
+                _fileName.postValue(file.fileNumber)
+                _fileDescription.postValue(file.fileDescription)
             }
         }
     }

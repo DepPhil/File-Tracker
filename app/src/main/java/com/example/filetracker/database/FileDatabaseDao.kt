@@ -15,6 +15,9 @@ interface FileDatabaseDao {
     @Query("SELECT * FROM filedetailwithlastmovement WHERE moving_out = :showOutList")
     fun getAllFilesWithLastMovement(showOutList: Boolean): LiveData<List<FileDetailWithLastMovement>>
 
+    @Query("SELECT * FROM movement_detail_table WHERE moved_file_id = :fileId")
+    fun getListMovementDetails(fileId: Int): List<MovementDetail>
+
 
 //    @Query("SELECT * FROM max_movement_time")
 //    fun getMaxMovementTime(): List<MaxMovementTime>

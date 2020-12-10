@@ -1,13 +1,21 @@
 package com.example.filetracker.mainFragment
 
 import android.app.Application
+import android.content.Intent
+import android.os.Build
+import android.os.Environment
+import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import com.example.filetracker.database.*
 import kotlinx.coroutines.*
+import org.json.JSONArray
+import org.json.JSONObject
 import timber.log.Timber
+import java.io.File
 
 class MainFragmentViewModel(application: Application): AndroidViewModel(application) {
     private var viewModelJob = Job()
@@ -20,6 +28,11 @@ class MainFragmentViewModel(application: Application): AndroidViewModel(applicat
 
     private val _outFilesNumber : LiveData<Int?>
             val outFilesNumber: LiveData<Int?> get() = _outFilesNumber
+
+    // A button click listener
+    private val _buttonClicked = MutableLiveData<Boolean?>()
+    val buttonClicked: LiveData<Boolean?> get() = _buttonClicked
+
     init {
         Timber.i("Initialising Class")
         databaseDao = FileDatabase.getInstance(application).fileDatabaseDao
@@ -79,6 +92,59 @@ class MainFragmentViewModel(application: Application): AndroidViewModel(applicat
                     insertMovement(MovementDetail(movedFileId = 3))
                 }
 
+            }
+        }
+    }
+
+
+    @RequiresApi(Build.VERSION_CODES.R)
+    fun showPath(){
+        //val file = Environment.getDataDirectory()
+        val file = File("/data")
+        val fileList = file.listFiles()
+        Timber.i("The root directory is: ${file.absolutePath}")
+    }
+
+    fun createFile(){
+        _buttonClicked.value = true
+
+    }
+    fun doneWithButtonClick(){
+        _buttonClicked.value = null
+    }
+
+    @RequiresApi(Build.VERSION_CODES.R)
+    fun showData(){
+        uiScope.launch {
+            withContext(Dispatchers.IO){
+                val files = databaseDao.getFileWithMovement()
+                Timber.i("The files are: %s", files)
+
+                val allFiles = JSONArray()
+
+                for(file in files){
+                    val jsonFile = JSONObject()
+                    val movements = JSONArray()
+                    for(movement in file.movement){
+                        val jsonObject = JSONObject()
+                        with(jsonObject){
+                            put("movementId", movement.movementId)
+                            put("movedFileId", movement.movedFileId)
+                            put("movingOut", movement.movingOut)
+                            put("movementTime", movement.movementTime)
+                        }
+                        movements.put(jsonObject)
+                    }
+                    with(jsonFile){
+                        put("fileId", file.file.fileId)
+                        put("fileDescription", file.file.fileDescription)
+                        put("fileNumber", file.file.fileNumber)
+                        put("movements", movements)
+                    }
+                    allFiles.put(jsonFile)
+                }
+                Timber.i("All files are: %s", allFiles.toString(1))
+                //Timber.i(Environment.getStorageDirectory().absolutePath)
             }
         }
     }

@@ -1,0 +1,93 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 5,
+    "identityHash": "35b5b2e72d96fda938c5bd58e0419ce3",
+    "entities": [
+      {
+        "tableName": "file_detail_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`file_id` INTEGER NOT NULL, `file_number` TEXT NOT NULL, `file_description` TEXT NOT NULL, PRIMARY KEY(`file_id`))",
+        "fields": [
+          {
+            "fieldPath": "fileId",
+            "columnName": "file_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fileNumber",
+            "columnName": "file_number",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fileDescription",
+            "columnName": "file_description",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "file_id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "movement_detail_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`movement_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `moved_file_id` INTEGER NOT NULL, `moving_out` INTEGER NOT NULL, `movement_time` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "movementId",
+            "columnName": "movement_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "movedFileId",
+            "columnName": "moved_file_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "movingOut",
+            "columnName": "moving_out",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "movementTime",
+            "columnName": "movement_time",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "movement_id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [
+      {
+        "viewName": "max_movement_time",
+        "createSql": "CREATE VIEW `${VIEW_NAME}` AS SELECT MAX(movement_time) as movement_time, moved_file_id, moving_out FROM movement_detail_table GROUP BY moved_file_id"
+      },
+      {
+        "viewName": "FileDetailWithLastMovement",
+        "createSql": "CREATE VIEW `${VIEW_NAME}` AS SELECT file_id, file_number, file_description, movement_time, moving_out FROM file_detail_table INNER JOIN max_movement_time ON file_id = moved_file_id"
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '35b5b2e72d96fda938c5bd58e0419ce3')"
+    ]
+  }
+}

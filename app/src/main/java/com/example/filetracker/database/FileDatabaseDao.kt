@@ -12,7 +12,7 @@ interface FileDatabaseDao {
     @Query("SELECT COUNT(file_id) FROM filedetailwithlastmovement WHERE moving_out = 1")
     fun getOutFileNumber(): LiveData<Int?>
 
-    @Query("SELECT * FROM filedetailwithlastmovement WHERE moving_out = :showOutList")
+    @Query("SELECT * FROM filedetailwithlastmovement WHERE moving_out = :showOutList ORDER BY movement_time DESC")
     fun getAllFilesWithLastMovement(showOutList: Boolean): LiveData<List<FileDetailWithLastMovement>>
 
     @Query("SELECT * FROM movement_detail_table WHERE moved_file_id = :fileId ORDER BY movement_time DESC")

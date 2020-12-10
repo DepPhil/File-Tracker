@@ -1,0 +1,125 @@
+[
+     {
+      "fileId": 1,
+      "fileDescription": "A file to keep test something",
+      "fileNumber": "II(3)1\/Estt\/Testing\/2020",
+      "movements": [
+       {
+        "movementId": 1,
+        "movedFileId": 1,
+        "movingOut": false,
+        "movementTime": 1606733322626
+       }
+      ]
+     },
+     {
+      "fileId": 2,
+      "fileDescription": "The Main Fragment is starting point of our app",
+      "fileNumber": "II(3)2\/Estt\/Main\/2020",
+      "movements": [
+       {
+        "movementId": 2,
+        "movedFileId": 2,
+        "movingOut": false,
+        "movementTime": 1606733322630
+       }
+      ]
+     },
+     {
+      "fileId": 3,
+      "fileDescription": "The Barcode Scanner uses MI kit of google",
+      "fileNumber": "II(3)3\/Estt\/Scanner\/2020",
+      "movements": [
+       {
+        "movementId": 3,
+        "movedFileId": 3,
+        "movingOut": false,
+        "movementTime": 1606733322631
+       },
+       {
+        "movementId": 4,
+        "movedFileId": 3,
+        "movingOut": true,
+        "movementTime": 1606733379456
+       },
+       {
+        "movementId": 5,
+        "movedFileId": 3,
+        "movingOut": false,
+        "movementTime": 1606733526840
+       },
+       {
+        "movementId": 6,
+        "movedFileId": 3,
+        "movingOut": false,
+        "movementTime": 1606733974395
+       },
+       {
+        "movementId": 7,
+        "movedFileId": 3,
+        "movingOut": true,
+        "movementTime": 1606828685616
+       },
+       {
+        "movementId": 8,
+        "movedFileId": 3,
+        "movingOut": true,
+        "movementTime": 1606833841348
+       },
+       {
+        "movementId": 9,
+        "movedFileId": 3,
+        "movingOut": true,
+        "movementTime": 1606833947684
+       },
+       {
+        "movementId": 10,
+        "movedFileId": 3,
+        "movingOut": false,
+        "movementTime": 1606833962864
+       },
+       {
+        "movementId": 11,
+        "movedFileId": 3,
+        "movingOut": true,
+        "movementTime": 1606834004096
+       },
+       {
+        "movementId": 12,
+        "movedFileId": 3,
+        "movingOut": false,
+        "movementTime": 1606842734288
+       },
+       {
+        "movementId": 13,
+        "movedFileId": 3,
+        "movingOut": false,
+        "movementTime": 1606843159507
+       },
+       {
+        "movementId": 14,
+        "movedFileId": 3,
+        "movingOut": false,
+        "movementTime": 1607002156798
+       },
+       {
+        "movementId": 15,
+        "movedFileId": 3,
+        "movingOut": false,
+        "movementTime": 1607002798095
+       },
+       {
+        "movementId": 16,
+        "movedFileId": 3,
+        "movingOut": true,
+        "movementTime": 1607002816063
+       },
+       {
+        "movementId": 17,
+        "movedFileId": 3,
+        "movingOut": true,
+        "movementTime": 1607002831143
+       }
+      ]
+     }
+    ]

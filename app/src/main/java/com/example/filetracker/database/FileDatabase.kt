@@ -10,7 +10,7 @@ import timber.log.Timber
         entities = [FileDetail::class, MovementDetail::class],
         views = [MaxMovementTime::class, FileDetailWithLastMovement::class],
         version = 5,
-        exportSchema = false)
+        exportSchema = true)
 abstract class FileDatabase: RoomDatabase() {
 
     abstract val fileDatabaseDao: FileDatabaseDao

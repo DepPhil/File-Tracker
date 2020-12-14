@@ -8,9 +8,7 @@ import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider.getUriForFile
@@ -94,28 +92,10 @@ class MainFragment: Fragment() {
 
             if(it == true){
                 val database = context?.getDatabasePath("file_movement_database")
-                val dir = context?.filesDir
-                val file = File(dir.toString() + "/xml")
-                file.mkdir()
-                val xmlFile = File("$file/data.xml")
-                val res = xmlFile.createNewFile()
-                val uri = getUriForFile(requireContext(), "com.example.myapp.fileprovider", xmlFile)
 
-                val shareIntent = Intent().apply {
-                    action = Intent.ACTION_SEND
-                    type = "text/xml"
-                    data = uri
-                    clipData = ClipData.newRawUri("", uri)
-                    flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
-                    putExtra(Intent.EXTRA_STREAM, uri)
-                }
-                startActivityForResult(Intent.createChooser(shareIntent, null), 11)
 
                 if(false){
-                    val fileWriter = FileWriter(xmlFile).use { writer ->
-                        writer.write("I'm writing something")
-                        writer.close()
-                    }
+
 
                 }
                 //val getDir = context?.getDir(dir.toString() + "/xml", Context.MODE_PRIVATE)
@@ -131,6 +111,10 @@ class MainFragment: Fragment() {
         binding.lifecycleOwner = this
         return binding.root
     }
+
+
+
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

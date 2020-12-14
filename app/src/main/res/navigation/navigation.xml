@@ -82,4 +82,8 @@
             android:name="fileId"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.example.filetracker.trackfile.AboutFragment"
+        android:label="@string/titleAboutFragment" />
 </navigation>

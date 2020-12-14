@@ -4,4 +4,17 @@
 
     <string name="no_camera_permission">Give Permission to use Camera in order to start scanning</string>
     <string name="default_file_description" translatable="false"></string>
+
+
+<!--    About Fragment-->
+    <string name="titleAboutFragment">This App</string>
+    <string name="contentAboutFragment">
+        <b>This App may be used in lieu of File Movement Register kept in Govt. Offices.
+        Please note the following points:\n\n</b>
+        1) The scanner will read only QR barcode.\n
+        2) Place stickers of QR barcode on your file with any natural number from 1 to 50000.\n
+        3) Scan the barcode whenever the file is coming in or going out of your hands.\n
+        4) File number may be written in lower case as the app will capitalize the file number before saving.\n
+        5) The data can be exported in xml format and may be seen in excel if required.
+    </string>
 </resources>

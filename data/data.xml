@@ -1,58 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-  <xs:element name="files">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element name="file">
-          <xs:attribute name="fileId" type="xs:integer"/>
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="number" type="xs:string"/>
-              <xs:element name="description" type="xs:string"/>
-              <xs:element name="movements">
-                <xs:complexType>
-                  <xs:sequence>
-                    <xs:element name="movement">
-                      <xs:attribute name="movementId" type="xs:integer"/>
-                      <xs:complexType>
-                        <xs:sequence>
-                          <xs:element name="movedFileId" type="xs:string"/>
-                          <xs:element name="movingOut" type="xs:boolean"/>
-                          <xs:element name="movementTime" type="xs:integer"/>
-                        </xs:sequence>
-                      </xs:complexType>
-                    </xs:element>
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-        
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
 
-</xs:schema>
-
-<!-- <files>
-  <file fileId=1>
+<files>
+  <file>
+    <fileId>1</fileId>
     <number>F.No.I</number>
     <description>Description</description>
     <movements>
-      <movement movementid=1>
+      <movement >
+      <movementid>1</movementid>
         <movedFileId>1</movedFileId>
         <movingOut>False</movingOut>
         <movementTime>799898</movementTime>
       </movement>
-      <movement movementid=2>
+      <movement>
+      <movementid>1</movementid>
         <movedFileId>1</movedFileId>
         <movingOut>False</movingOut>
         <movementTime>799898</movementTime>
       </movement>
     </movements>
   </file>
-</files> -->
+</files>
 

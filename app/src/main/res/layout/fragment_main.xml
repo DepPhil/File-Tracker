@@ -13,17 +13,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:onClick="@{()-> mainFragmentViewModel.requestForNavigationToBarcodeScanner()}"
-            android:text="Scan"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+<!--        <Button-->
+<!--            android:id="@+id/button"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginBottom="16dp"-->
+<!--            android:onClick="@{()-> mainFragmentViewModel.requestForNavigationToBarcodeScanner()}"-->
+<!--            android:text="Scan"-->
+<!--            android:textSize="30sp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent" />-->
 
         <TextView
             android:id="@+id/outFileNumber"
@@ -75,16 +75,17 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView"
             app:srcCompat="@drawable/ic_in_circle" />
 
-        <Button
-            android:id="@+id/button3"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floating_action_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"
-            android:text="Button"
-            app:layout_constraintBottom_toTopOf="@+id/button"
+            android:layout_gravity="bottom|right"
+            android:layout_margin="16dp"
+            android:contentDescription=""
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:onClick="@{()->mainFragmentViewModel.createFile()}"/>
+            app:srcCompat="@drawable/ic_add_24px"
+            android:onClick="@{()-> mainFragmentViewModel.requestForNavigationToBarcodeScanner()}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -11,69 +11,115 @@
             name="clickListener"
             type="com.example.filetracker.filelist.FileListClickListener" />
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content">-->
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:clickable="true"
+        android:onClick="@{()-> clickListener.onClick(file)}"
 
-        <com.google.android.material.card.MaterialCardView
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:clickable="true"
-            android:onClick="@{()-> clickListener.onClick(file)}"
+            android:layout_height="wrap_content">
 
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <LinearLayout
+            <TextView
+                android:id="@+id/fileNumber"
+                style="?attr/textAppearanceHeadline5"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="8dp"
-                android:paddingBottom="8dp">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                app:fileNumber="@{file}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Title"
+                />
 
-                <TextView
-                    android:id="@+id/fileNumber"
-                    style="?attr/textAppearanceHeadline5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:fileNumber="@{file}"
-                    tools:text="Title" />
+            <TextView
+                android:id="@+id/fileDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                app:fileDescription="@{file}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fileNumber"
+                tools:text="File Description goes here"
+                />
 
-                <TextView
-                    android:id="@+id/fileDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:fileDescription="@{file}"
-                    tools:text="File Description goes here" />
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fileDescription"
+                app:movementImage="@{file}"
+                />/>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_weight="0"
-                    android:orientation="horizontal">
+            <TextView
+                android:id="@+id/fileMovementTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="8dp"
+                app:fileMovementTime="@{file}"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+                app:layout_constraintStart_toEndOf="@+id/imageView5"
+                app:layout_constraintTop_toTopOf="@+id/imageView5"
+                tools:text="Show Time here"
+                />
 
-                    <ImageView
-                        android:id="@+id/imageView5"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        app:movementImage="@{file}" />
+<!--            <ImageView-->
+<!--                android:id="@+id/deleteView"-->
+<!--                android:layout_width="24dp"-->
+<!--                android:layout_height="24dp"-->
+<!--                android:layout_gravity="center_vertical"-->
+<!--                android:layout_marginEnd="8dp"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/fileMovementTime"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintHorizontal_bias="1.0"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/fileMovementTime"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/fileMovementTime"-->
+<!--                app:srcCompat="@drawable/ic_delete_24px" />-->
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <TextView
-                        android:id="@+id/fileMovementTime"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="16dp"
-                        app:fileMovementTime="@{file}"
-                        tools:text="Show Time here" />
-                </LinearLayout>
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--            <LinearLayout-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:orientation="vertical"-->
+        <!--                android:padding="8dp"-->
+        <!--                android:paddingBottom="8dp">-->
+
+
+        <!--                <LinearLayout-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:layout_marginTop="8dp"-->
+        <!--                    android:layout_weight="0"-->
+        <!--                    android:orientation="horizontal">-->
+
+
+        <!--                </LinearLayout>-->
+        <!--            </LinearLayout>-->
+    </com.google.android.material.card.MaterialCardView>
+
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 </layout>

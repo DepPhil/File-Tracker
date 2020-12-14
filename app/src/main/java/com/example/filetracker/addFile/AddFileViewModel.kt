@@ -22,6 +22,9 @@ class AddFileViewModel(application: Application, private val fileId: Int): ViewM
     private val _navigateToNextFragment = MutableLiveData<Boolean?>(null)
     val navigateToNextFragment: LiveData<Boolean?> get() = _navigateToNextFragment
 
+    private val _navigateToScanner = MutableLiveData<Boolean>(false)
+    val navigateToScanner: LiveData<Boolean>get() = _navigateToScanner
+
     // Variables to get info from editTexts
     var fileNumber: String? = null
     var fileDescription: String? = null
@@ -47,6 +50,11 @@ class AddFileViewModel(application: Application, private val fileId: Int): ViewM
 
     fun doneNavigatingToNextFragment(){
         _navigateToNextFragment.value = false
+        _navigateToScanner.value = false
+    }
+
+    fun onNavigateToScanner(){
+        _navigateToScanner.value = true
     }
     override fun onCleared() {
         super.onCleared()

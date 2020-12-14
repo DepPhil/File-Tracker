@@ -23,6 +23,9 @@ class FileListViewModel(application: Application, showOutList: Boolean): ViewMod
     private val _navigateToNextFragment = MutableLiveData<Int?>()
     val navigateToNextFragment: LiveData<Int?> get() = _navigateToNextFragment
 
+    private val _navigateToScanner = MutableLiveData<Boolean>(false)
+    val navigateToScanner: LiveData<Boolean>get() = _navigateToScanner
+
     init {
         Timber.i("Initialising ViewModel")
 
@@ -34,6 +37,11 @@ class FileListViewModel(application: Application, showOutList: Boolean): ViewMod
     }
     fun doneNavigatingToNextFragment(){
         _navigateToNextFragment.value = null
+        _navigateToScanner.value = false
+    }
+
+    fun onNavigateToScanner(){
+        _navigateToScanner.value = true
     }
 
 }

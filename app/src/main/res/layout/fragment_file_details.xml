@@ -57,7 +57,8 @@
             android:contentDescription=""
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_add_24px" />
+            app:srcCompat="@drawable/ic_add_24px"
+            android:onClick="@{()->viewModel.onNavigationToScanner()}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

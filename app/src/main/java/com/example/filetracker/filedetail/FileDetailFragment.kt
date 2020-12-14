@@ -8,9 +8,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.filetracker.R
 import com.example.filetracker.databinding.FragmentFileDetailsBinding
 import com.example.filetracker.databinding.FragmentFileListBinding
+import timber.log.Timber
 
 class FileDetailFragment: Fragment() {
     private var _binding: FragmentFileDetailsBinding? = null
@@ -36,6 +38,17 @@ class FileDetailFragment: Fragment() {
                 adapter.submitList(it)
             }
         })
+
+        viewModel.navigateToScanner.observe(viewLifecycleOwner, Observer {
+            if (it){
+                Timber.i("Navigating to Scanner")
+                this.findNavController().navigate(
+                        FileDetailFragmentDirections.actionFileDetailFragmentToBarcodeScannerFragment()
+                )
+                viewModel.doneNavigatingToNextFragment()
+            }
+        })
+
         binding.lifecycleOwner = this
         return binding.root
     }

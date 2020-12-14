@@ -41,6 +41,16 @@ class TrackFileFragment: Fragment() {
                 viewModel.doneNavigatingToNextFragment()
             }
         })
+
+        viewModel.navigateToScanner.observe(viewLifecycleOwner, Observer {
+            if(it == true){
+                Timber.i("Navigating to Scanner")
+                this.findNavController().navigate(
+                        TrackFileFragmentDirections.actionTrackFileFragmentToBarcodeScannerFragment()
+                )
+                viewModel.doneNavigatingToNextFragment()
+            }
+        })
         binding.lifecycleOwner = this
         return binding.root
     }

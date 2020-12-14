@@ -26,7 +26,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
-            tools:text="F.No.II(2)1/Estt/Something/2020" />
+            tools:text="F.No.II(2)1/Estt/Something/2020"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
 
         <ImageView
             android:id="@+id/imageView3"
@@ -63,7 +64,8 @@
             android:contentDescription=""
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_add_24px" />
+            app:srcCompat="@drawable/ic_add_24px"
+            android:onClick="@{()-> viewModel.onNavigateToScanner()}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

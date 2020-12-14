@@ -48,6 +48,10 @@
         <action
             android:id="@+id/action_fileListFragment_to_fileDetailFragment"
             app:destination="@id/fileDetailFragment" />
+        <action
+            android:id="@+id/action_fileListFragment_to_barcodeScannerFragment"
+            app:destination="@id/barcodeScannerFragment"
+            app:popUpTo="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/addFileFragment"
@@ -59,6 +63,10 @@
         <action
             android:id="@+id/action_addFileFragment_to_fileListFragment"
             app:destination="@id/fileListFragment"
+            app:popUpTo="@id/mainFragment" />
+        <action
+            android:id="@+id/action_addFileFragment_to_barcodeScannerFragment"
+            app:destination="@id/barcodeScannerFragment"
             app:popUpTo="@id/mainFragment" />
     </fragment>
     <fragment
@@ -72,6 +80,10 @@
             android:id="@+id/action_trackFileFragment_to_fileListFragment"
             app:destination="@id/fileListFragment"
             app:popUpTo="@id/mainFragment" />
+        <action
+            android:id="@+id/action_trackFileFragment_to_barcodeScannerFragment"
+            app:destination="@id/barcodeScannerFragment"
+            app:popUpTo="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/fileDetailFragment"
@@ -81,6 +93,10 @@
         <argument
             android:name="fileId"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_fileDetailFragment_to_barcodeScannerFragment"
+            app:destination="@id/barcodeScannerFragment"
+            app:popUpTo="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"

@@ -22,6 +22,9 @@ class FileDetailViewModel(application: Application, fileId: Int): ViewModel() {
     private val _fileDescription = MutableLiveData<String?>()
     val fileDescription: LiveData<String?> get() = _fileDescription
 
+    private val _navigateToScanner = MutableLiveData<Boolean>(false)
+    val navigateToScanner: LiveData<Boolean>get() = _navigateToScanner
+
     init {
         uiScope.launch {
             withContext(Dispatchers.IO){
@@ -33,6 +36,14 @@ class FileDetailViewModel(application: Application, fileId: Int): ViewModel() {
                 _fileDescription.postValue(file.fileDescription)
             }
         }
+    }
+
+    fun doneNavigatingToNextFragment(){
+        _navigateToScanner.value = false
+    }
+
+    fun onNavigationToScanner(){
+        _navigateToScanner.value = true
     }
 
     override fun onCleared() {

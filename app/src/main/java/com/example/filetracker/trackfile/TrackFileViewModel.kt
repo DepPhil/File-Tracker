@@ -16,6 +16,9 @@ class TrackFileViewModel(application: Application, private val fileId: Int): Vie
     private val _fileName = MutableLiveData<String?>()
     val fileName: LiveData<String?> get() = _fileName
 
+    private val _navigateToScanner = MutableLiveData<Boolean?>(null)
+    val navigateToScanner: LiveData<Boolean?>get() = _navigateToScanner
+
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
@@ -49,6 +52,11 @@ class TrackFileViewModel(application: Application, private val fileId: Int): Vie
 
     fun doneNavigatingToNextFragment(){
         _isFileMovingOut.value = null
+        _navigateToScanner.value = null
+    }
+
+    fun onNavigateToScanner(){
+        _navigateToScanner.value = true
     }
 
 }

@@ -35,6 +35,9 @@ interface FileDatabaseDao {
     @Insert
     fun insertMovement(movement: MovementDetail)
 
+    @Update
+    fun upDateFile(file: FileDetail)
+
 //    @Insert
 //    fun insertFileMovement(fileMovement: FileMovement)
 

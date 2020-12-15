@@ -97,9 +97,26 @@
             android:id="@+id/action_fileDetailFragment_to_barcodeScannerFragment"
             app:destination="@id/barcodeScannerFragment"
             app:popUpTo="@id/mainFragment" />
+        <action
+            android:id="@+id/action_fileDetailFragment_to_editFileFragment"
+            app:destination="@id/editFileFragment" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.example.filetracker.trackfile.AboutFragment"
         android:label="@string/titleAboutFragment" />
+    <fragment
+        android:id="@+id/editFileFragment"
+        android:name="com.example.filetracker.editfile.EditFileFragment"
+        android:label="fragment_edit"
+        tools:layout="@layout/fragment_edit" >
+        <argument
+            android:name="fileId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_editFileFragment_to_fileDetailFragment"
+            app:destination="@id/fileDetailFragment"
+            app:popUpTo="@id/fileDetailFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

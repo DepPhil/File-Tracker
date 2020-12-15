@@ -17,26 +17,30 @@
 
         <TextView
             android:id="@+id/fd_fileNumber"
+            style="?attr/textAppearanceHeadline5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@{viewModel.fileName}"
-            tools:text="F.No.II(3)4/Estt/Something/2020"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@{viewModel.fileMovement.file.fileNumber}"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            style="?attr/textAppearanceHeadline5"/>
+            app:layout_constraintTop_toBottomOf="@+id/file_id"
+            tools:text="F.No.II(3)4/Estt/Something/2020" />
 
         <TextView
             android:id="@+id/fd_fileDescription"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:text="@{viewModel.fileDescription}"
-            tools:text="A generic description of a generic file"
+            android:layout_marginEnd="8dp"
+            android:text="@{viewModel.fileMovement.file.fileDescription}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fd_fileNumber" />
+            app:layout_constraintTop_toBottomOf="@+id/fd_fileNumber"
+            tools:text="A generic description of a generic file" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/file_detail_recycler_view"
@@ -59,6 +63,41 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/ic_add_24px"
             android:onClick="@{()->viewModel.onNavigationToScanner()}"/>
+
+        <TextView
+            android:id="@+id/file_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="@{viewModel.getString(viewModel.fileMovement.file.fileId)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/textView5"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="1" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="File ID: "
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/ic_edit_24px"
+            app:layout_constraintBottom_toBottomOf="@+id/file_id"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/file_id"
+            android:onClick="@{()->viewModel.onNavigateToEditFileFragment()}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

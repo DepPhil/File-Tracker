@@ -33,9 +33,9 @@ class FileDetailFragment: Fragment() {
         binding.fileDetailRecyclerView.adapter = adapter
 
         // Observer for submitting list to the adapter
-        viewModel.movementDetailList.observe(viewLifecycleOwner, Observer {
+        viewModel.fileMovement.observe(viewLifecycleOwner, Observer {
             it?.let {
-                adapter.submitList(it)
+                adapter.submitList(it.movement)
             }
         })
 
@@ -44,6 +44,16 @@ class FileDetailFragment: Fragment() {
                 Timber.i("Navigating to Scanner")
                 this.findNavController().navigate(
                         FileDetailFragmentDirections.actionFileDetailFragmentToBarcodeScannerFragment()
+                )
+                viewModel.doneNavigatingToNextFragment()
+            }
+        })
+
+        viewModel.navigateToEditFileFragment.observe(viewLifecycleOwner, Observer {
+            it?.let{
+                Timber.i("Navigating to Edit File Fragment")
+                this.findNavController().navigate(
+                        FileDetailFragmentDirections.actionFileDetailFragmentToEditFileFragment(it)
                 )
                 viewModel.doneNavigatingToNextFragment()
             }

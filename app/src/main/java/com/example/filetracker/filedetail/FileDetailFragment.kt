@@ -33,9 +33,9 @@ class FileDetailFragment: Fragment() {
         binding.fileDetailRecyclerView.adapter = adapter
 
         // Observer for submitting list to the adapter
-        viewModel.fileMovement.observe(viewLifecycleOwner, Observer {
+        viewModel.movementDetailList.observe(viewLifecycleOwner, Observer {
             it?.let {
-                adapter.submitList(it.movement)
+                adapter.submitList(it)
             }
         })
 

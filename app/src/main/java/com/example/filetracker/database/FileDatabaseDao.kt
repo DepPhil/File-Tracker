@@ -18,6 +18,9 @@ interface FileDatabaseDao {
     @Query("SELECT * FROM movement_detail_table WHERE moved_file_id = :fileId ORDER BY movement_time DESC")
     fun getListMovementDetails(fileId: Int): List<MovementDetail>
 
+    @Query("SELECT * FROM filedetailwithlastmovement WHERE file_id = :fileId")
+    fun getFileWithLastMovement(fileId: Int): FileDetailWithLastMovement
+
 
 //    @Query("SELECT * FROM max_movement_time")
 //    fun getMaxMovementTime(): List<MaxMovementTime>

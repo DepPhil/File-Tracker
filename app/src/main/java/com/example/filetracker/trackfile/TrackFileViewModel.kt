@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.filetracker.database.FileDatabase
 import com.example.filetracker.database.FileDatabaseDao
+import com.example.filetracker.database.FileDetailWithLastMovement
 import com.example.filetracker.database.MovementDetail
 import kotlinx.coroutines.*
 
@@ -15,6 +16,9 @@ class TrackFileViewModel(application: Application, private val fileId: Int): Vie
     private val databaseDao: FileDatabaseDao = FileDatabase.getInstance(application).fileDatabaseDao
     private val _fileName = MutableLiveData<String?>()
     val fileName: LiveData<String?> get() = _fileName
+
+    private val _file = MutableLiveData<FileDetailWithLastMovement?>()
+    val file: LiveData<FileDetailWithLastMovement?> get() = _file
 
     private val _navigateToScanner = MutableLiveData<Boolean?>(null)
     val navigateToScanner: LiveData<Boolean?>get() = _navigateToScanner
@@ -29,6 +33,8 @@ class TrackFileViewModel(application: Application, private val fileId: Int): Vie
             withContext(Dispatchers.IO){
                 val file = databaseDao.getFileDetailsWithId(fileId)
                 _fileName.postValue(file.fileNumber)
+
+                _file.postValue(databaseDao.getFileWithLastMovement(fileId))
             }
         }
     }

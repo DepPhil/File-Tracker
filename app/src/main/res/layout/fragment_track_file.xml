@@ -17,9 +17,9 @@
             android:id="@+id/floating_action_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
+            android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
-            android:contentDescription=""
+            android:contentDescription="FAB for navigating to Barcode Scanner"
             android:onClick="@{()-> viewModel.onNavigateToScanner()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +36,8 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/file_description"
-            app:srcCompat="@drawable/ic_in_circle" />
+            app:srcCompat="@drawable/ic_in_circle"
+            android:contentDescription="IN Clickable Image"/>
 
         <ImageView
             android:id="@+id/movement_image"
@@ -69,16 +70,16 @@
 
         <TextView
             android:id="@+id/file_description"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
             android:text="@{viewModel.file.fileDescription}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:layout_constraintBottom_toTopOf="@+id/imageView3"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fileNumber"
             tools:text="Some Description of some file." />
@@ -95,7 +96,8 @@
             app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView3"
-            app:srcCompat="@drawable/ic_out_circle" />
+            app:srcCompat="@drawable/ic_out_circle"
+            android:contentDescription="OUT Clickable Image"/>
 
         <TextView
             android:id="@+id/movement_time"
@@ -106,7 +108,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/movement_image"
-            tools:text="Monday 01-Jan-1900 Time:00:00" />
+            tools:text="Monday 01-Jan-1900 Time:00:00"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

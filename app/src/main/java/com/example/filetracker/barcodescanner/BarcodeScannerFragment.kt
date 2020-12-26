@@ -176,7 +176,7 @@ class AddNewFileDialogFragment: DialogFragment(){
         return activity?.let {
             listener = this.targetFragment as NoticeDialogListener
             // Use the Builder class for convenient dialog construction
-            val builder = AlertDialog.Builder(it)
+            val builder = AlertDialog.Builder(it, R.style.Theme_MaterialComponents_Dialog_Alert)
             builder.setMessage("This File does not exist. Add this file?")
                 .setPositiveButton("Add",
                     DialogInterface.OnClickListener { dialog, id ->

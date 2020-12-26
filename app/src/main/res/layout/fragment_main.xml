@@ -63,7 +63,8 @@
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_out_circle" />
+            app:srcCompat="@drawable/ic_out_circle"
+            android:contentDescription="Image with Out text"/>
 
         <ImageView
             android:id="@+id/imageView2"
@@ -73,15 +74,16 @@
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView"
-            app:srcCompat="@drawable/ic_in_circle" />
+            app:srcCompat="@drawable/ic_in_circle"
+            android:contentDescription="Image with In text"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floating_action_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
+            android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
-            android:contentDescription=""
+            android:contentDescription="FAB for opening barcode scanner."
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/ic_add_24px"

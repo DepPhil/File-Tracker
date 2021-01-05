@@ -38,7 +38,7 @@ class MainFragmentViewModel(application: Application): AndroidViewModel(applicat
         databaseDao = FileDatabase.getInstance(application).fileDatabaseDao
         _inFilesNumber = databaseDao.getInFileNumber()
         _outFilesNumber = databaseDao.getOutFileNumber()
-        Timber.i("inFiles %s", _inFilesNumber.value)
+        //Timber.i("inFiles %s", _inFilesNumber.value)
 //        uiScope.launch {
 //
 ////            withContext(Dispatchers.IO){

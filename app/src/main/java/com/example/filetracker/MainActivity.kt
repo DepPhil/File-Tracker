@@ -2,16 +2,20 @@ package com.example.filetracker
 
 import android.os.Bundle
 import android.Manifest
+import android.app.Activity
 import android.content.ClipData
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment.findNavController
@@ -19,16 +23,22 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.example.filetracker.barcodescanner.AddNewFileDialogFragment
 import com.example.filetracker.camera.Camera
+import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
 import java.io.File
-
+import java.lang.IllegalArgumentException
+import java.net.URI
+import javax.xml.parsers.DocumentBuilder
+import javax.xml.parsers.DocumentBuilderFactory
+private const val INTENT_SHARE_FILE = 11
+private const val INTENT_GET_FILE = 12
 
 class MainActivity: AppCompatActivity(){
-
+       private lateinit var viewModel: MainActivityViewModel
        override fun onCreate(savedInstanceState: Bundle?) {
            super.onCreate(savedInstanceState)
            setContentView(R.layout.activity_main)
-           val viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
+           viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
 
            // Navigation UI
            val navController = findNavController(R.id.nav_host_fragment)
@@ -43,7 +53,9 @@ class MainActivity: AppCompatActivity(){
                            navController.navigate(R.id.aboutFragment)
 
                        }else if(it.itemId == R.id.exportData){
-                           sendIntent(viewModel)
+                           sendIntent()
+                       }else if(it.itemId == R.id.importData){
+                           getData()
                        }
 
                    }
@@ -51,6 +63,13 @@ class MainActivity: AppCompatActivity(){
                }
            }
 
+           viewModel.showSnackbar.observe(this, Observer {
+               if(it){
+                   Snackbar.make(findViewById(R.id.nav_host_fragment), R.string.incorrect_data_file, Snackbar.LENGTH_LONG)
+                           .show()
+                   viewModel.doneShowingSnackbar()
+               }
+           })
 
 
            // Check if camera permissions has been granted. If not, seek permissions
@@ -60,7 +79,48 @@ class MainActivity: AppCompatActivity(){
            }
     }
 
-    private fun sendIntent(viewModel: MainActivityViewModel) {
+    private fun getData() {
+        val getDataIntent = Intent().apply {
+            action = Intent.ACTION_OPEN_DOCUMENT
+            type = "*/*"
+            addCategory(Intent.CATEGORY_OPENABLE)
+        }
+        Timber.i("Starting activity for result with code: $INTENT_GET_FILE")
+        startActivityForResult(getDataIntent, INTENT_GET_FILE)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        Timber.i("Got activity with result code: $requestCode")
+        if(requestCode == INTENT_GET_FILE && resultCode == Activity.RESULT_OK){
+
+            try{
+                val fileUri: Uri = requireNotNull(data?.data)
+//                TODO("content resolver taking too much time to provide input stream" +
+//                        "find a way to make it short.")
+                //val inputStream = contentResolver.openInputStream(fileUri)
+                viewModel.importData(contentResolver, fileUri)
+
+
+            }catch (e: Exception){
+                Timber.i("$e: ${e.message}")
+                // Create Snackbar
+                Snackbar.make(findViewById(R.id.nav_host_fragment), R.string.incorrect_data_file, Snackbar.LENGTH_LONG)
+                        .show()
+
+            }
+
+
+
+
+
+
+            Timber.i("Got the document")
+
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    private fun sendIntent() {
         val dir = applicationContext.filesDir
         val file = File("$dir/xml")
         file.mkdir()
@@ -77,7 +137,7 @@ class MainActivity: AppCompatActivity(){
             flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
             putExtra(Intent.EXTRA_STREAM, uri)
         }
-        startActivityForResult(Intent.createChooser(shareIntent, null), 11)
+        startActivityForResult(Intent.createChooser(shareIntent, null), INTENT_SHARE_FILE)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -3,7 +3,7 @@
     <string name="start_scan">Start Scan</string>
 
     <string name="no_camera_permission">Give Permission to use Camera in order to start scanning</string>
-    <string name="default_file_description" translatable="false"></string>
+    <string name="default_file_description" translatable="false" />
 
 
 <!--    About Fragment-->
@@ -17,4 +17,7 @@
         4) File number may be written in lower case as the app will capitalize the file number before saving.\n
         5) The data can be exported in xml format and may be seen in excel if required.
     </string>
+
+<!--    Snackbar-->
+    <string name="incorrect_data_file">Incorrect Data File!!!</string>
 </resources>

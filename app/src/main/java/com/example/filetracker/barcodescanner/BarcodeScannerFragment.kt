@@ -107,7 +107,9 @@ class BarcodeScannerFragment: Fragment(), AddNewFileDialogFragment.NoticeDialogL
 
     override fun onDialogNegativeClick(dialog: DialogFragment) {
         Timber.i("Navigating back to Main Fragment")
-        TODO("Implement navigation back")
+        this.findNavController().navigate(
+                BarcodeScannerFragmentDirections.actionBarcodeScannerFragmentToMainFragment()
+        )
     }
 
 //    private fun startCamera(){

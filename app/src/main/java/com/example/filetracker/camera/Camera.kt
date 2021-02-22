@@ -169,9 +169,9 @@ object Camera
                         // Task completed successfully
                         // ...
                         Timber.i("barcode scanning success")
-                        for(barcode in barcodes){
-                            Timber.i("Bardcode raw data is: %s", barcode.rawValue)
-                            barcodeScannerViewModel.gotBarcodeString(barcode.rawValue)
+                        if(barcodes.size != 0){
+                            Timber.i("Bardcode raw data is: %s", barcodes[0].rawValue)
+                            barcodeScannerViewModel.gotBarcodeString(barcodes[0].rawValue)
                         }
                     }
                     .addOnFailureListener {

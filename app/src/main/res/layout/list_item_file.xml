@@ -6,10 +6,10 @@
     <data>
         <variable
             name="file"
-            type="com.example.filetracker.database.FileDetailWithLastMovement" />
+            type="com.phaggu.filetracker.database.FileDetailWithLastMovement" />
         <variable
             name="clickListener"
-            type="com.example.filetracker.filelist.FileListClickListener" />
+            type="com.phaggu.filetracker.filelist.FileListClickListener" />
     </data>
 <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
 <!--        android:layout_width="match_parent"-->

@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.filetracker.filelist.FileListViewModel" />
+            type="com.phaggu.filetracker.filelist.FileListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

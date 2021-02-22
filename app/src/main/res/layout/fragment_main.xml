@@ -6,7 +6,7 @@
     <data>
         <variable
             name="mainFragmentViewModel"
-            type="com.example.filetracker.mainFragment.MainFragmentViewModel" />
+            type="com.phaggu.filetracker.mainFragment.MainFragmentViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -23,7 +23,7 @@ apply plugin: 'androidx.navigation.safeargs'
 android {
     compileSdkVersion 30
     defaultConfig {
-        applicationId "com.example.filetracker"
+        applicationId "com.phaggu.filetracker"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1

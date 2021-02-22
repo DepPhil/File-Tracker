@@ -6,7 +6,7 @@
     <data>
         <variable
             name="movement"
-            type="com.example.filetracker.database.MovementDetail" />
+            type="com.phaggu.filetracker.database.MovementDetail" />
 
     </data>
 

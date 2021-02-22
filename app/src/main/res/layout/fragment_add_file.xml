@@ -5,7 +5,7 @@
     <data>
 <variable
     name="viewModel"
-    type="com.example.filetracker.addFile.AddFileViewModel" />
+    type="com.phaggu.filetracker.addFile.AddFileViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -109,7 +109,7 @@
     <fragment
         android:id="@+id/editFileFragment"
         android:name="com.example.filetracker.editfile.EditFileFragment"
-        android:label="fragment_edit"
+        android:label="Edit File"
         tools:layout="@layout/fragment_edit" >
         <argument
             android:name="fileId"

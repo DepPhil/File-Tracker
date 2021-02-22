@@ -20,4 +20,11 @@
 
 <!--    Snackbar-->
     <string name="incorrect_data_file">Incorrect Data File!!!</string>
+    <string name="About_Heading">A Simple App to keep track of files going out/coming in the section/desk/office.</string>
+    <string name="About_Line1">1) Print out some QR Barcode stickers (any number from 1 to 2,147,483,647) and
+        paste them on the file.</string>
+    <string name="About_Line2">2) Scan the QR Code using "+" Floating Action Button from anywhere in the app.</string>
+    <string name="About_Line3">3) The first time you scan the QR Code, the app will ask you to add the file.
+        Later, you only need to scan and record the movement.</string>
+    <string name="About_Line4">4) Export Data in xml format and visualise it in Excel as per your convenience.</string>
 </resources>

@@ -2,13 +2,17 @@ package com.phaggu.filetracker
 
 import android.os.Bundle
 import android.app.Activity
+import android.app.Dialog
 import android.content.ClipData
+import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.view.MenuItem
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.FileProvider
+import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -57,6 +61,14 @@ class MainActivity: AppCompatActivity(){
                    Snackbar.make(findViewById(R.id.nav_host_fragment), R.string.incorrect_data_file, Snackbar.LENGTH_LONG)
                            .show()
                    viewModel.doneShowingSnackbar()
+               }
+           })
+
+           viewModel.showDeleteDialog.observe(this, Observer {
+               if(it){
+                    val dialogFragment = DeleteDataDialogFragment(viewModel)
+                   dialogFragment.show(this.supportFragmentManager, "showDeleteDialog")
+                   viewModel.doneShowingDeleteDialog()
                }
            })
 
@@ -149,4 +161,28 @@ class MainActivity: AppCompatActivity(){
         super.onDestroy()
     }
     
+}
+
+class DeleteDataDialogFragment(viewModel: MainActivityViewModel): DialogFragment(){
+    private val viewModel = viewModel
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        Timber.i("Creating Dialong Fragment")
+        return activity?.let {
+
+            // Use the Builder class for convenient dialog construction
+            val builder = AlertDialog.Builder(it, R.style.Theme_MaterialComponents_Dialog_Alert)
+            builder.setMessage("This will delete your existing data and replace it with imported data!!! Continue?")
+                    .setPositiveButton("Yes",
+                            DialogInterface.OnClickListener { dialog, id ->
+                                viewModel.deleteAndAddData()
+                            })
+                    .setNegativeButton("No",
+                            DialogInterface.OnClickListener { dialog, id ->
+                                // Nothing happens if No is clicked
+                            })
+            // Create the AlertDialog object and return it
+            builder.create()
+        } ?: throw IllegalStateException("Activity cannot be null")
+    }
+    //return super.onCreateDialog(savedInstanceState)
 }

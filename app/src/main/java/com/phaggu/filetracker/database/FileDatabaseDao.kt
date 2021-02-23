@@ -20,12 +20,29 @@ interface FileDatabaseDao {
     @Query("SELECT * FROM filedetailwithlastmovement WHERE file_id = :fileId")
     fun getFileWithLastMovement(fileId: Int): FileDetailWithLastMovement
 
+    @Query("DELETE FROM movement_detail_table")
+    fun deleteAllMovements()
+
+    @Query("DELETE FROM file_detail_table")
+    fun deleteAllfiles()
+
+    @Insert
+    fun insertFile(file: FileDetail)
+
+    @Insert
+    fun insertMovement(movement: MovementDetail)
+
+    @Query("SELECT COUNT(file_id) FROM file_detail_table")
+    fun getFileCount(): Int
+
+    @Query("SELECT COUNT(movement_id) FROM movement_detail_table")
+    fun getMovementCount():Int
+
 
 //    @Query("SELECT * FROM max_movement_time")
 //    fun getMaxMovementTime(): List<MaxMovementTime>
 
-    @Insert
-    fun insertFile(file: FileDetail)
+
 
     @Query("SELECT * FROM file_detail_table WHERE file_id = :fileId")
     fun getFileDetailsWithId(fileId: Int): FileDetail
@@ -33,15 +50,13 @@ interface FileDatabaseDao {
     @Query("DELETE FROM file_detail_table WHERE file_id = :fileId")
     fun deleteFile(fileId: Long)
 
-    // Insert Movement details
-    @Insert
-    fun insertMovement(movement: MovementDetail)
+
 
     @Update
     fun upDateFile(file: FileDetail)
 
 //    @Insert
-//    fun insertFileMovement(fileMovement: FileMovement)
+//    fun insertFileMovement(fileMovement: MutableList<FileMovement>)
 
     //
     @Query("SELECT * FROM file_detail_table")

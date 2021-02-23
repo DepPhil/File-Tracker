@@ -15,6 +15,7 @@ import timber.log.Timber
 import java.io.File
 import java.io.FileWriter
 import java.lang.Exception
+import java.lang.NullPointerException
 import java.lang.StringBuilder
 import javax.xml.parsers.DocumentBuilderFactory
 
@@ -25,6 +26,11 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
 
     private val _showSnackbar = MutableLiveData<Boolean>(false)
             val showSnackbar: LiveData<Boolean> get() = _showSnackbar
+
+    private val _showDeleteDialog = MutableLiveData<Boolean>(false)
+    val showDeleteDialog: LiveData<Boolean> get() = _showDeleteDialog
+
+    private var filesForDatabase = mutableListOf<FileMovement>()
 
     fun writeData(file: File){
         uiScope.launch {
@@ -72,8 +78,8 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
                     //val document = documentBuilder.parse(inputStream)
                     contentResolver.openInputStream(uri).use {
                         document = documentBuilder.parse(it)
-                        val filesForDatabase = prepareDataforRoom(document)
-                        insertDataIntoDatabase(filesForDatabase)
+                        prepareDataforRoom(document)
+                        _showDeleteDialog.postValue(true)
                     }
 
 
@@ -87,16 +93,13 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
         }
     }
 
-    private fun insertDataIntoDatabase(filesForDatabase: MutableList<FileMovement>) {
-       TODO("Show Dialog Box informing user that present data will be deleted")
-       
-       TODO("Delete Database and insert new Data")
+    fun doneShowingDeleteDialog(){
+        _showDeleteDialog.value = false
     }
 
-    private suspend fun prepareDataforRoom(document: Document): MutableList<FileMovement> {
+    private suspend fun prepareDataforRoom(document: Document) {
         val files = document.documentElement
         val fileList = files.getElementsByTagName("file")
-        val filesForDatabase = mutableListOf<FileMovement>()
 
         // This loops through all the 'file' elements
         for(index in 0 until fileList.length){
@@ -104,13 +107,13 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
             val fileDetail = FileDetail()
             val movementDetails = mutableListOf<MovementDetail>()
 
-            Timber.i("${file.nodeName}[$index] reading.")
+            //Timber.i("${file.nodeName}[$index] reading.")
             val fileAttr: NodeList = file.childNodes
 
             // This loops through all the child elements of 'file'
             for(i in 0 until fileAttr.length){
                 val attr: Node = fileAttr.item(i)
-                Timber.i("${attr.nodeName} reading.")
+                //Timber.i("${attr.nodeName} reading.")
                 when(attr.nodeName){
                     "fileId" -> {fileDetail.fileId = attr.textContent.toInt()}
                     "fileNumber" -> {fileDetail.fileNumber = attr.textContent}
@@ -140,10 +143,30 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
             }
             // All the details of the file taken, add to list
             val fileMovement = FileMovement(fileDetail, movementDetails)
+            Timber.i("adding file: %s", fileMovement.toString())
             filesForDatabase.add(fileMovement)
         }
         // Done with this xml file
-        return filesForDatabase
+
+    }
+
+    fun deleteAndAddData(){
+        Timber.i("Deleting Data")
+        uiScope.launch {
+            withContext(Dispatchers.IO){
+                databaseDao.deleteAllMovements()
+                databaseDao.deleteAllfiles()
+                Timber.i("Adding Data")
+                for (fileMovement in filesForDatabase) {
+                    Timber.i("Adding file with id ${fileMovement.file.fileId}" )
+                    databaseDao.insertFile(fileMovement.file)
+                    for (movement in fileMovement.movement) {
+                        databaseDao.insertMovement(movement)
+                    }
+                }
+                filesForDatabase.clear()
+            }
+        }
     }
 
     fun doneShowingSnackbar(){
